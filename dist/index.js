@@ -37269,7 +37269,7 @@ mustache.Scanner = Scanner;
 mustache.Context = Context;
 mustache.Writer = Writer;
 
-const gcloudRunTemplate = fs__default.readFileSync('../src/gcloud-run.mustache.yml', 'utf-8');
+const gcloudRunTemplate = fs__default.readFileSync('./dist/gcloud-run.mustache.yml', 'utf-8');
 
 function createSpec(spec, version, environment) {
   const hasSidecars = spec.sidecars && spec.sidecars.length > 0;

@@ -1,0 +1,46 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: shiny-hunt-non
+  annotations:
+    run.googleapis.com/launch-stage: BETA
+spec:
+  template:
+    spec:
+      containers:
+      - 
+        name: shiny-hunt-ui
+        image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-hunt-ui:1.0.7
+        ports:
+        - containerPort: 8080
+          name: http1
+        env:
+          - name: ENVIRONMENT
+            value: non
+          - name: SPRING_PROFILES_ACTIVE
+            value: non
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      - 
+        name: java-server
+        image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-stats-java-server:1.0.7
+        env:
+          - name: ENVIRONMENT
+            value: non
+          - name: SPRING_PROFILES_ACTIVE
+            value: non
+          - name: PORT
+            value: '8888'
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+      timeoutSeconds: 300

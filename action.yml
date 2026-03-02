@@ -5,9 +5,6 @@ inputs:
   version: # id of input
     description: The version to insert into the spec
     required: true
-  environments:
-    description: Environments to generate specs for. Comma separated list of environment names
-    required: true
   spec:
     description: Spec file to use to generate GCloud specs
     required: true

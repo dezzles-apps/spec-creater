@@ -61,7 +61,7 @@ export INPUT_VERSION="$VERSION"
 export INPUT_SPEC="$SPEC_FILE"
 
 # Run the node script
-if node src/index.js; then
+if node dist/index.js; then
     echo ""
     echo -e "${GREEN}✓ Spec Creator completed successfully${NC}"
     echo -e "${GREEN}✓ Generated specs in the 'specs/' directory${NC}"
