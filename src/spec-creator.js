@@ -1,6 +1,6 @@
 import mustache from 'mustache'
 import fs from 'fs'
-const gcloudRunTemplate = fs.readFileSync('./src/gcloud-run.mustache.yml', 'utf-8')
+const gcloudRunTemplate = fs.readFileSync('../src/gcloud-run.mustache.yml', 'utf-8')
 
 export default function mapSpec(spec, version, environments) {
   const mappedSpec = JSON.parse(JSON.stringify(spec));
