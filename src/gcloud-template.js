@@ -40,7 +40,7 @@ spec:
             value: {{ environment}}
           - name: SPRING_PROFILES_ACTIVE
             value: {{ environment }}
-          - name: PORT
+          - name: SERVER_PORT
             value: '{{ port }}'
         resources:
           limits:
