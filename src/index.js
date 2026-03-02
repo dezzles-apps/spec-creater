@@ -34,7 +34,7 @@ try {
   fs.mkdirSync('specs', { recursive: true })
   specJson.environments.forEach(env => {
     const generatedSpec = createSpec(specJson, version, env)
-    const outputPath = `specs/${specJson.name}-${env}.yaml`
+    const outputPath = `specs/${specJson.name}-${env}.yml`
     fs.writeFileSync(outputPath, generatedSpec)
   })
   core.info(`The event payload: ${payload}`)
