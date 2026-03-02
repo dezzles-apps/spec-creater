@@ -1,0 +1,31 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: shiny-stats-prod
+spec:
+  template:
+    spec:
+      containers:
+      - 
+        name: shiny-stats
+        image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-stats-java-server:1.0.0
+        ports:
+        - containerPort: 8080
+          name: http1
+        env:
+          - name: ENVIRONMENT
+            value: prod
+          - name: SPRING_PROFILES_ACTIVE
+            value: prod
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      serviceAccountName: shiny-stats-sa@dezzles-apps.iam.gserviceaccount.com
+      timeoutSeconds: 300

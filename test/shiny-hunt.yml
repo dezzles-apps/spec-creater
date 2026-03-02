@@ -1,0 +1,12 @@
+name: shiny-hunt
+environments:
+  - non
+  - prod
+primary:
+  name: shiny-hunt-ui
+  image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-hunt-ui
+  port: 8080
+sidecars:
+  - name: java-servcer
+    image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-stats-java-server
+    port: 8888

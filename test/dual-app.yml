@@ -1,0 +1,12 @@
+name: nginx-example
+environments:
+  - dev
+  - prod
+primary:
+  name: nginx
+  image: nginx
+  port: 8080
+sidecars:
+  - name: hello
+    image: us-docker.pkg.dev/cloudrun/container/hello
+    port: 8888

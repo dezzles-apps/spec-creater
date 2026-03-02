@@ -1,0 +1,38 @@
+{
+  "name": "spec-creator",
+  "version": "1.0.0",
+  "description": "Spec Creator",
+  "keywords": [
+    "github",
+    "actions"
+  ],
+  "homepage": "https://github.com/dezzles-apps/spec-creator#readme",
+  "bugs": {
+    "url": "https://github.com/dezzles-apps/spec-creator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dezzles-apps/spec-creator.git"
+  },
+  "license": "MIT",
+  "author": "Dezzles",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup --config rollup.config.js"
+  },
+  "dependencies": {
+    "@actions/core": "^3.0.0",
+    "@actions/github": "^9.0.0",
+    "js-yaml": "^4.1.1",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "chai": "^6.2.2",
+    "mocha": "^11.7.5",
+    "rollup": "^4.58.0"
+  }
+}
