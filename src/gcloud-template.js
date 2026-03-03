@@ -46,6 +46,12 @@ spec:
           limits:
             cpu: 500m
             memory: 256Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: {{ port }}
+          timeoutSeconds: 240
       {{/spec.sidecars}}
       {{ #spec.serviceAccountName }}
       serviceAccountName: {{ spec.serviceAccountName }}
