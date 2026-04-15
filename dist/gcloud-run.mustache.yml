@@ -21,6 +21,13 @@ spec:
             value: {{ environment}}
           - name: SPRING_PROFILES_ACTIVE
             value: {{ environment }}
+          {{#spec.primary.secrets}}
+          - name: {{ envName }}
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: {{ name }}
+          {{/spec.primary.secrets}}
         resources:
           limits:
             cpu: 500m
@@ -42,6 +49,13 @@ spec:
             value: {{ environment }}
           - name: SERVER_PORT
             value: '{{ port }}'
+          {{#secrets}}
+          - name: {{ envName }}
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: {{ name }}
+          {{/secrets}}
         resources:
           limits:
             cpu: 500m
