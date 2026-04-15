@@ -21,6 +21,10 @@ spec:
             value: {{ environment}}
           - name: SPRING_PROFILES_ACTIVE
             value: {{ environment }}
+          {{#spec.primary.env}}
+          - name: {{ envName }}
+            value: {{ value }}
+          {{/spec.primary.env}}
           {{#spec.primary.secrets}}
           - name: {{ envName }}
             valueFrom:
@@ -49,6 +53,10 @@ spec:
             value: {{ environment }}
           - name: SERVER_PORT
             value: '{{ port }}'
+          {{#env}}
+          - name: {{ envName }}
+            value: {{ value }}
+          {{/env}}
           {{#secrets}}
           - name: {{ envName }}
             valueFrom:
