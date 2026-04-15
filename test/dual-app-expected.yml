@@ -19,6 +19,13 @@ spec:
             value: uat
           - name: SPRING_PROFILES_ACTIVE
             value: uat
+          - name: UI_URL
+            value: my-ui
+          - name: UI_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: alltheskins-ui
         resources:
           limits:
             cpu: 500m
@@ -37,8 +44,15 @@ spec:
             value: uat
           - name: SPRING_PROFILES_ACTIVE
             value: uat
-          - name: PORT
+          - name: SERVER_PORT
             value: '8888'
+          - name: DATASOURCE_URL
+            value: my-datasource
+          - name: DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: alltheskins-non
         resources:
           limits:
             cpu: 500m

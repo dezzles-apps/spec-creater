@@ -6,7 +6,20 @@ primary:
   name: nginx
   image: nginx
   port: 8080
+  secrets:
+    - envName: UI_PASSWORD
+      secretName: alltheskins-ui
+  env:
+    - envName: UI_URL
+      value: my-ui
+
 sidecars:
   - name: hello
     image: us-docker.pkg.dev/cloudrun/container/hello
     port: 8888
+    secrets:
+      - envName: DATASOURCE_PASSWORD
+        secretName: alltheskins-non
+    env:
+      - envName: DATASOURCE_URL
+        value: my-datasource
