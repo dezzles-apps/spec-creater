@@ -37335,6 +37335,12 @@ spec:
                 key: latest
                 name: {{ secretName }}
           {{/secrets}}
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: {{ port }}
+          timeoutSeconds: 240
         resources:
           limits:
             cpu: 500m
