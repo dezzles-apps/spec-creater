@@ -37294,7 +37294,7 @@ spec:
             value: {{ environment }}
           {{#spec.primary.env}}
           - name: {{ envName }}
-            value: {{ value }}
+            value: {{{ value }}}
           {{/spec.primary.env}}
           {{#spec.primary.secrets}}
           - name: {{ envName }}
@@ -37326,7 +37326,7 @@ spec:
             value: '{{ port }}'
           {{#env}}
           - name: {{ envName }}
-            value: {{ value }}
+            value: {{{ value }}}
           {{/env}}
           {{#secrets}}
           - name: {{ envName }}
@@ -37351,8 +37351,29 @@ spec:
       {{ /spec.serviceAccountName }}
       timeoutSeconds: 300`;
 
+function handleNumericEnvValues(env) {
+  return env.map(variable => {
+    if (typeof variable.value === 'number') {
+      return { ...variable, value: `'${variable.value}'` };
+    }
+    if (typeof variable.value === 'string' && !isNaN(variable.value)) {
+      return { ...variable, value: `'${variable.value}'` };
+    }
+    return variable;
+  });
+}
+
 function createSpec(spec, version, environment) {
   const hasSidecars = spec.sidecars && spec.sidecars.length > 0;
+  if (spec.primary) {
+    spec.primary.env = handleNumericEnvValues(spec.primary.env || []);
+  }
+  if (spec.sidecars) {
+    spec.sidecars = spec.sidecars.map(sidecar => {
+      sidecar.env = handleNumericEnvValues(sidecar.env || []);
+      return sidecar;
+    });
+  }
   return mustache.render(template, { spec, version, environment, hasSidecars })
 }
 

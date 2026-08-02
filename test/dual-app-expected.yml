@@ -21,6 +21,10 @@ spec:
             value: uat
           - name: UI_URL
             value: my-ui
+          - name: NUMERIC_VALUE
+            value: '123'
+          - name: NUMERIC_STRING_VALUE
+            value: '1234'
           - name: UI_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -48,11 +52,21 @@ spec:
             value: '8888'
           - name: DATASOURCE_URL
             value: my-datasource
+          - name: NUMERIC_VALUE2
+            value: '456'
+          - name: NUMERIC_STRING_VALUE2
+            value: '4567'
           - name: DATASOURCE_PASSWORD
             valueFrom:
               secretKeyRef:
                 key: latest
                 name: alltheskins-non
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8888
+          timeoutSeconds: 240
         resources:
           limits:
             cpu: 500m

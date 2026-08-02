@@ -23,7 +23,7 @@ spec:
             value: {{ environment }}
           {{#spec.primary.env}}
           - name: {{ envName }}
-            value: {{ value }}
+            value: {{{ value }}}
           {{/spec.primary.env}}
           {{#spec.primary.secrets}}
           - name: {{ envName }}
@@ -55,7 +55,7 @@ spec:
             value: '{{ port }}'
           {{#env}}
           - name: {{ envName }}
-            value: {{ value }}
+            value: {{{ value }}}
           {{/env}}
           {{#secrets}}
           - name: {{ envName }}

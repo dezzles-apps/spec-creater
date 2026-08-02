@@ -12,7 +12,10 @@ primary:
   env:
     - envName: UI_URL
       value: my-ui
-
+    - envName: NUMERIC_VALUE
+      value: 123
+    - envName: NUMERIC_STRING_VALUE
+      value: '1234'
 sidecars:
   - name: hello
     image: us-docker.pkg.dev/cloudrun/container/hello
@@ -23,3 +26,7 @@ sidecars:
     env:
       - envName: DATASOURCE_URL
         value: my-datasource
+      - envName: NUMERIC_VALUE2
+        value: 456
+      - envName: NUMERIC_STRING_VALUE2
+        value: '4567'
