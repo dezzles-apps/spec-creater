@@ -37273,10 +37273,15 @@ const template = `apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: {{ spec.name }}-{{ environment }}
-  {{#hasSidecars}}
+  {{#hasAnnotations}}
   annotations:
+    {{#hasSidecars}}
     run.googleapis.com/launch-stage: BETA
-  {{/hasSidecars}}
+    {{/hasSidecars}}
+    {{#audiences}}
+    run.googleapis.com/custom-audiences: '[{{{audiences}}}]'
+    {{/audiences}}
+  {{/hasAnnotations}}
 spec:
   template:
     spec:
@@ -37365,6 +37370,9 @@ function handleNumericEnvValues(env) {
 
 function createSpec(spec, version, environment) {
   const hasSidecars = spec.sidecars && spec.sidecars.length > 0;
+  const hasAudiences = spec.audiences && spec.audiences.length > 0;
+  const hasAnnotations = hasSidecars || hasAudiences;
+  const audiences = hasAudiences ? spec.audiences.map(v => `"${v}"`).join(',') : null;
   if (spec.primary) {
     spec.primary.env = handleNumericEnvValues(spec.primary.env || []);
   }
@@ -37374,7 +37382,7 @@ function createSpec(spec, version, environment) {
       return sidecar;
     });
   }
-  return mustache.render(template, { spec, version, environment, hasSidecars })
+  return mustache.render(template, { spec, version, environment, hasSidecars, hasAnnotations, audiences });
 }
 
 function validate(spec) {

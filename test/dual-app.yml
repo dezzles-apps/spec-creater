@@ -2,6 +2,9 @@ name: nginx-example
 environments:
   - dev
   - prod
+audiences:
+  - audience1
+  - audience2
 primary:
   name: nginx
   image: nginx

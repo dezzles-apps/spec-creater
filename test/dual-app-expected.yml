@@ -4,6 +4,7 @@ metadata:
   name: nginx-example-uat
   annotations:
     run.googleapis.com/launch-stage: BETA
+    run.googleapis.com/custom-audiences: '["audience1","audience2"]'
 spec:
   template:
     spec:

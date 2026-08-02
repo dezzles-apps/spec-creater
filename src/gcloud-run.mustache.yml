@@ -2,10 +2,15 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: {{ spec.name }}-{{ environment }}
-  {{#hasSidecars}}
+  {{#hasAnnotations}}
   annotations:
+    {{#hasSidecars}}
     run.googleapis.com/launch-stage: BETA
-  {{/hasSidecars}}
+    {{/hasSidecars}}
+    {{#audiences}}
+    run.googleapis.com/custom-audiences: '[{{{audiences}}}]'
+    {{/audiences}}
+  {{/hasAnnotations}}
 spec:
   template:
     spec:
@@ -30,7 +35,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: latest
-                name: {{ name }}
+                name: {{ secretName }}
           {{/spec.primary.secrets}}
         resources:
           limits:
@@ -62,8 +67,14 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: latest
-                name: {{ name }}
+                name: {{ secretName }}
           {{/secrets}}
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: {{ port }}
+          timeoutSeconds: 240
         resources:
           limits:
             cpu: 500m

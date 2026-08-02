@@ -2,10 +2,15 @@ const template = `apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: {{ spec.name }}-{{ environment }}
-  {{#hasSidecars}}
+  {{#hasAnnotations}}
   annotations:
+    {{#hasSidecars}}
     run.googleapis.com/launch-stage: BETA
-  {{/hasSidecars}}
+    {{/hasSidecars}}
+    {{#audiences}}
+    run.googleapis.com/custom-audiences: '[{{{audiences}}}]'
+    {{/audiences}}
+  {{/hasAnnotations}}
 spec:
   template:
     spec:

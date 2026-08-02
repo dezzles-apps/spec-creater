@@ -21,6 +21,9 @@ function handleNumericEnvValues(env) {
 
 export function createSpec(spec, version, environment) {
   const hasSidecars = spec.sidecars && spec.sidecars.length > 0
+  const hasAudiences = spec.audiences && spec.audiences.length > 0
+  const hasAnnotations = hasSidecars || hasAudiences
+  const audiences = hasAudiences ? spec.audiences.map(v => `"${v}"`).join(',') : null;
   if (spec.primary) {
     spec.primary.env = handleNumericEnvValues(spec.primary.env || []);
   }
@@ -30,5 +33,5 @@ export function createSpec(spec, version, environment) {
       return sidecar;
     });
   }
-  return mustache.render(gcloudRunTemplate, { spec, version, environment, hasSidecars })
+  return mustache.render(gcloudRunTemplate, { spec, version, environment, hasSidecars, hasAnnotations, audiences });
 }
