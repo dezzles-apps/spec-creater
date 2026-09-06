@@ -1,3 +1,4 @@
+$schema: https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/project.v1.schema.json
 name: nginx-example
 environments:
   - dev

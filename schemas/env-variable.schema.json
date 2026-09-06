@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/env-variable.schema.json",
+  "$id": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/env-variable.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Description of an environment variable",
   "type": "object",

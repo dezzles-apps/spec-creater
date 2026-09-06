@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/project.v1.schema.json",
+  "$id": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/project.v1.schema.json",
   "title": "Dezzles' Apps Deployment",
   "description": "",
   "type": "object",

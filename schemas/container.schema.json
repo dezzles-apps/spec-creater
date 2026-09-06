@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json",
+  "$id": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/container.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Description of a container",
   "type": "object",
