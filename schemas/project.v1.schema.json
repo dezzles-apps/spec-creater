@@ -32,13 +32,13 @@
     },
     "primary": {
       "description": "Primary container to run in Google Cloud Run",
-      "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json"
+      "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/container.schema.json"
     },
     "sidecars": {
       "description": "Sidecars running",
       "type": "array",
       "items": {
-        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json"
+        "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/container.schema.json"
       }
     }
   },

@@ -28,14 +28,14 @@
       "description": "List of environment variables",
       "type": "array",
       "items": {
-        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/env-variable.schema.json"
+        "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/env-variable.schema.json"
       }
     },
     "secrets": {
       "description": "List of mappings from secrets to environment variables",
       "type": "array",
       "items": {
-        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/secret.schema.json"
+        "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/secret.schema.json"
       }
     }
   }
