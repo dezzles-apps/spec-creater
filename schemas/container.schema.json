@@ -1,0 +1,42 @@
+{
+  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Description of a container",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "image",
+    "port"
+  ],
+  "properties": {
+    "name": {
+      "description": "Name of the container",
+      "type": "string"
+    },
+    "image": {
+      "description": "Docker image to use for deployment",
+      "type": "string"
+    },
+    "port": {
+      "description": "Port to be exposed to Google Cloud Run",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "env": {
+      "description": "List of environment variables",
+      "type": "array",
+      "items": {
+        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/env-variable.schema.json"
+      }
+    },
+    "secrets": {
+      "description": "List of mappings from secrets to environment variables",
+      "type": "array",
+      "items": {
+        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/secret.schema.json"
+      }
+    }
+  }
+}
