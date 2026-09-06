@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/project.v1.schema.json",
+  "title": "Dezzles' Apps Deployment",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the app being built",
+      "type": "string"
+    },
+    "environments": {
+      "description": "Environments that deployment specs should be generated for",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [ "non", "dev", "sit", "uat", "prod" ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "audiences": {
+      "description": "Audiences that should be able to call to this service",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "serviceAccountName": {
+      "description": "Service Account that the service should run under",
+      "type": "string"
+    },
+    "primary": {
+      "description": "Primary container to run in Google Cloud Run",
+      "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json"
+    },
+    "sidecars": {
+      "description": "Sidecars running",
+      "type": "array",
+      "items": {
+        "$ref": "https://github.com/dezzles-apps/spec-creater/schemas/container.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "environments"
+  ]
+}

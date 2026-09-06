@@ -1,0 +1,22 @@
+{
+  "$id": "https://github.com/dezzles-apps/spec-creater/schemas/env-variable.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Description of an environment variable",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "envName",
+    "value"
+  ],
+  "properties": {
+    "envName": {
+      "description": "Name of environment variable",
+      "type": "string",
+      "pattern": "^[A-Z]+(_[A-Z0-9]+)*$"
+    },
+    "value": {
+      "description": "Value of environment variable",
+      "type": "string"
+    }
+  }
+}

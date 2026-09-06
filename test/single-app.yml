@@ -2,7 +2,7 @@ name: shiny-stats
 serviceAccountName: shiny-stats-sa@dezzles-apps.iam.gserviceaccount.com
 environments:
   - non
-  - prd
+  - prod
 primary:
   name: shiny-stats
   image: us-west2-docker.pkg.dev/dezzles-apps/dezzles-apps-docker/shiny-stats-java-server

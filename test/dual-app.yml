@@ -16,7 +16,7 @@ primary:
     - envName: UI_URL
       value: my-ui
     - envName: NUMERIC_VALUE
-      value: 123
+      value: '123'
     - envName: NUMERIC_STRING_VALUE
       value: '1234'
 sidecars:
@@ -30,6 +30,6 @@ sidecars:
       - envName: DATASOURCE_URL
         value: my-datasource
       - envName: NUMERIC_VALUE2
-        value: 456
+        value: '456'
       - envName: NUMERIC_STRING_VALUE2
         value: '4567'

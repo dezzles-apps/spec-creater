@@ -1,36 +1,22 @@
+import { Validator } from '@cfworker/json-schema';
+import { readFileSync } from 'fs'
+
 export default function validate(spec) {
-  const errors = [];
-  if (spec === null || typeof spec !== 'object') {
-    errors.push(error('spec', null, 'Invalid spec, missing or malformed'));
-    return errors;
-  }
-  if (!validName(spec.name)) {
-    errors.push(error('name', null, 'Invalid name, must be lowercase alphanumeric and can include hyphens'));
-  }
-  if (!arrayIsNotEmpty(spec.environments)) {
-    errors.push(error('environments', null, 'Environments must be a non-empty array'));
-  } else {
-    spec.environments.forEach((env, index) => {
-      if (!validEnvironment(env)) {
-        errors.push(error('environments', index, `Invalid environment '${env}', must be one of: dev, sit, uat, non, prod`));
-      }
-    });
-  }
-  if (!isObject(spec.primary)) {
-    errors.push(error('primary', null, 'Primary container must be set'));
-  } else {
-    validateContainer(spec.primary, 'primary', errors);
-  }
-  if (arrayIsNotEmpty(spec.sidecars)) {
-    spec.sidecars.forEach((sidecar, index) => {
-      if (!isObject(sidecar)) {
-        errors.push(error('sidecars', index, 'Sidecar must be an object'));
-      } else {
-        validateContainer(sidecar, `sidecars[${index}]`, errors);
-      }
-    });
-  }
-  return errors;
+  const projectV1Schema = JSON.parse(
+    readFileSync('./schemas/project.v1.schema.json', 'utf8')
+  );
+  
+  const validator = new Validator(projectV1Schema);
+  [
+    'container',
+    'env-variable',
+    'secret'
+  ].forEach(schema => {
+    const s = readFileSync(`./schemas/${schema}.schema.json`, 'utf8');
+    validator.addSchema(JSON.parse(s))
+  })
+
+  return validator.validate(spec)
 }
 
 export function validateContainer(container, fieldPrefix, errors) {
