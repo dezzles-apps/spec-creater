@@ -38567,8 +38567,8 @@ function validate(spec) {
     'secret',
     'gcs-mount'
   ].forEach(schema => {
-    join(path, `../schemas/${schema}}.schema.json`);
-    const s = readFileSync(`${path}/schemas/${schema}.schema.json`, 'utf8');
+    const schemaPath = join(path, `../schemas/${schema}}.schema.json`);
+    const s = readFileSync(schemaPath, 'utf8');
     validator.addSchema(JSON.parse(s));
   });
 
