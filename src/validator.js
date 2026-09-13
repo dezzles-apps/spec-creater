@@ -18,7 +18,7 @@ export default function validate(spec) {
     'secret',
     'gcs-mount'
   ].forEach(schema => {
-    const schemaPath = join(path, `../schemas/${schema}}.schema.json`)
+    const schemaPath = join(path, `../schemas/${schema}.schema.json`)
     const s = readFileSync(schemaPath, 'utf8');
     validator.addSchema(JSON.parse(s))
   })
