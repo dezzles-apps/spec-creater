@@ -38552,7 +38552,9 @@ class Validator {
 }
 
 function validate(spec) {
+
   const path = process.env.GITHUB_ACTION_PATH ? process.env.GITHUB_ACTION_PATH : '.';
+  console.log('Github actions path: ',process.env.GITHUB_ACTION_PATH );
   const projectV1Schema = JSON.parse(
     readFileSync(`${path}/schemas/project.v1.schema.json`, 'utf8')
   );
