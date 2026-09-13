@@ -1,0 +1,30 @@
+{
+  "$id": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/gcs-mount.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Description of how to mount GCS Schemas",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "volumeName",
+    "mountPath",
+    "bucketName"
+  ],
+  "properties": {
+    "volumeName": {
+      "description": "Name of the volume",
+      "type": "string"
+    },
+    "mountPath": {
+      "description": "Path the volume should be mounted to",
+      "type": "string"
+    },
+    "bucketName": {
+      "description": "GCS Bucket to be mounted",
+      "type": "string"
+    },
+    "readOnly": {
+      "description": "Indicates whether the mount will be read only or not. Defaults to true",
+      "type": "boolean"
+    }
+  }
+}

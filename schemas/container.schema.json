@@ -31,6 +31,13 @@
         "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/env-variable.schema.json"
       }
     },
+    "mounts": {
+      "description": "GCS Volumes being mounted",
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/gcs-mount.schema.json"
+      }
+    },
     "secrets": {
       "description": "List of mappings from secrets to environment variables",
       "type": "array",
