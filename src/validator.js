@@ -5,6 +5,7 @@ export default function validate(spec) {
   const projectV1Schema = JSON.parse(
     readFileSync('./schemas/project.v1.schema.json', 'utf8')
   );
+  const path = process.env.GITHUB_ACTION_PATH ? process.env.GITHUB_ACTION_PATH : '.'
   
   const validator = new Validator(projectV1Schema);
   [
@@ -13,7 +14,7 @@ export default function validate(spec) {
     'secret',
     'gcs-mount'
   ].forEach(schema => {
-    const s = readFileSync(`./schemas/${schema}.schema.json`, 'utf8');
+    const s = readFileSync(`${path}/schemas/${schema}.schema.json`, 'utf8');
     validator.addSchema(JSON.parse(s))
   })
 
