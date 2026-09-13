@@ -4,6 +4,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 export default function validate(spec) {
+  const path = dirname(fileURLToPath(import.meta.url));
   const schemaPath = join(path, '../schemas/project.v1.schema.json')
   console.log('Schema Path: ', schemaPath)
   
@@ -17,8 +18,8 @@ export default function validate(spec) {
     'secret',
     'gcs-mount'
   ].forEach(schema => {
-    const schemaPath = join(path, `../schemas/${schema}.schema.json`)
-    const s = readFileSync(schemaPath, 'utf8');
+    const schemaPath = join(path, `../schemas/${schema}}.schema.json`)
+    const s = readFileSync(`${path}/schemas/${schema}.schema.json`, 'utf8');
     validator.addSchema(JSON.parse(s))
   })
 
