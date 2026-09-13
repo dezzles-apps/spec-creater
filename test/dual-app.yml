@@ -1,4 +1,3 @@
-$schema: https://raw.githubusercontent.com/dezzles-apps/spec-creater/refs/heads/main/schemas/project.v1.schema.json
 name: nginx-example
 environments:
   - dev
@@ -20,6 +19,15 @@ primary:
       value: '123'
     - envName: NUMERIC_STRING_VALUE
       value: '1234'
+  mounts:
+    - volumeName: test-mount
+      mountPath: /mnt/myfiles
+      bucketName: test-bucket
+    - volumeName: test-mount2
+      mountPath: /mnt/more-files
+      bucketName: another-bucket
+      readOnly: false
+      
 sidecars:
   - name: hello
     image: us-docker.pkg.dev/cloudrun/container/hello
@@ -34,3 +42,7 @@ sidecars:
         value: '456'
       - envName: NUMERIC_STRING_VALUE2
         value: '4567'
+    mounts:
+      - volumeName: sidecar-mount
+        mountPath: /mnt/secret-things
+        bucketName: test-jeff

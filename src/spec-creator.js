@@ -24,14 +24,23 @@ export function createSpec(spec, version, environment) {
   const hasAudiences = spec.audiences && spec.audiences.length > 0
   const hasAnnotations = hasSidecars || hasAudiences
   const audiences = hasAudiences ? spec.audiences.map(v => `"${v}"`).join(',') : null;
+  let usesMounts = false
   if (spec.primary) {
     spec.primary.env = handleNumericEnvValues(spec.primary.env || []);
+    if (spec.primary.mounts) {
+      usesMounts = true
+      spec.primary.hasMounts = true
+    }
   }
   if (spec.sidecars) {
     spec.sidecars = spec.sidecars.map(sidecar => {
       sidecar.env = handleNumericEnvValues(sidecar.env || []);
+      if (sidecar.mounts) {
+        usesMounts = true
+        sidecar.hasMounts = true
+      }
       return sidecar;
     });
   }
-  return mustache.render(gcloudRunTemplate, { spec, version, environment, hasSidecars, hasAnnotations, audiences });
+  return mustache.render(gcloudRunTemplate, { spec, version, environment, hasSidecars, hasAnnotations, audiences, usesMounts });
 }

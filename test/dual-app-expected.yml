@@ -31,6 +31,11 @@ spec:
               secretKeyRef:
                 key: latest
                 name: alltheskins-ui
+        volumeMounts:
+          - name: test-mount
+            mountPath: /mnt/myfiles
+          - name: test-mount2
+            mountPath: /mnt/more-files
         resources:
           limits:
             cpu: 500m
@@ -68,8 +73,27 @@ spec:
           tcpSocket:
             port: 8888
           timeoutSeconds: 240
+        volumeMounts:
+          - name: sidecar-mount
+            mountPath: /mnt/secret-things
         resources:
           limits:
             cpu: 500m
             memory: 256Mi
       timeoutSeconds: 300
+      volumes:
+        - name: test-mount
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            readOnly: true
+            volumeAttributes: test-bucket
+        - name: test-mount2
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            readOnly: true
+            volumeAttributes: another-bucket
+        - name: sidecar-mount
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            readOnly: true
+            volumeAttributes: test-jeff

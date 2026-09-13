@@ -10,7 +10,8 @@ export default function validate(spec) {
   [
     'container',
     'env-variable',
-    'secret'
+    'secret',
+    'gcs-mount'
   ].forEach(schema => {
     const s = readFileSync(`./schemas/${schema}.schema.json`, 'utf8');
     validator.addSchema(JSON.parse(s))

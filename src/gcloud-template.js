@@ -37,6 +37,13 @@ spec:
                 key: latest
                 name: {{ secretName }}
           {{/spec.primary.secrets}}
+        {{#spec.primary.hasMounts}}
+        volumeMounts:
+        {{#spec.primary.mounts}}
+          - name: {{ volumeName }}
+            mountPath: {{{ mountPath }}}
+        {{/spec.primary.mounts}}
+        {{/spec.primary.hasMounts}}
         resources:
           limits:
             cpu: 500m
@@ -75,6 +82,13 @@ spec:
           tcpSocket:
             port: {{ port }}
           timeoutSeconds: 240
+        {{#hasMounts}}
+        volumeMounts:
+        {{#mounts}}
+          - name: {{ volumeName }}
+            mountPath: {{{ mountPath }}}
+        {{/mounts}}
+        {{/hasMounts}}
         resources:
           limits:
             cpu: 500m
@@ -83,6 +97,25 @@ spec:
       {{ #spec.serviceAccountName }}
       serviceAccountName: {{ spec.serviceAccountName }}
       {{ /spec.serviceAccountName }}
-      timeoutSeconds: 300`
+      timeoutSeconds: 300
+      {{#usesMounts}}
+      volumes:
+      {{#spec.primary.mounts}}
+        - name: {{ volumeName }}
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            readOnly: true
+            volumeAttributes: {{ bucketName}}
+      {{/spec.primary.mounts}}
+      {{#spec.sidecars}}
+      {{#mounts}}
+        - name: {{ volumeName }}
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            readOnly: true
+            volumeAttributes: {{ bucketName}}
+      {{/mounts}}
+      {{/spec.sidecars}}
+      {{/usesMounts}}`
 
 export default template
