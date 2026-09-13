@@ -3,7 +3,7 @@ import os__default, { EOL } from 'os';
 import 'crypto';
 import * as fs from 'fs';
 import fs__default, { promises, existsSync, readFileSync } from 'fs';
-import { dirname, join } from 'path';
+import 'path';
 import http from 'http';
 import https from 'https';
 import 'net';
@@ -32,7 +32,7 @@ import require$$1$5 from 'node:dns';
 import require$$5$3 from 'string_decoder';
 import 'child_process';
 import 'timers';
-import { fileURLToPath } from 'url';
+import 'url';
 
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -38553,8 +38553,7 @@ class Validator {
 }
 
 function validate(spec) {
-  const path = dirname(fileURLToPath(import.meta.url));
-  const schemaPath = join(path, 'schemas/project.v1.schema.json');
+  const schemaPath = '../schemas/project.v1.schema.json';
   console.log('Schema Path: ', schemaPath);
   
   const projectV1Schema = JSON.parse(
@@ -38567,7 +38566,7 @@ function validate(spec) {
     'secret',
     'gcs-mount'
   ].forEach(schema => {
-    const schemaPath = join(path, `schemas/${schema}.schema.json`);
+    const schemaPath = `../schemas/${schema}.schema.json`;
     const s = readFileSync(schemaPath, 'utf8');
     validator.addSchema(JSON.parse(s));
   });
