@@ -105,7 +105,8 @@ spec:
           csi:
             driver: gcsfuse.run.googleapis.com
             readOnly: true
-            volumeAttributes: {{ bucketName}}
+            volumeAttributes:
+              bucketName: {{ bucketName}}
       {{/spec.primary.mounts}}
       {{#spec.sidecars}}
       {{#mounts}}
