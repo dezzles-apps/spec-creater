@@ -37385,7 +37385,8 @@ spec:
           csi:
             driver: gcsfuse.run.googleapis.com
             readOnly: true
-            volumeAttributes: {{ bucketName}}
+            volumeAttributes:
+              bucketName: {{ bucketName}}
       {{/mounts}}
       {{/spec.sidecars}}
       {{/usesMounts}}`;

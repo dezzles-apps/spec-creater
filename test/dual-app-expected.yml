@@ -86,14 +86,17 @@ spec:
           csi:
             driver: gcsfuse.run.googleapis.com
             readOnly: true
-            volumeAttributes: test-bucket
+            volumeAttributes:
+              bucketName: test-bucket
         - name: test-mount2
           csi:
             driver: gcsfuse.run.googleapis.com
             readOnly: true
-            volumeAttributes: another-bucket
+            volumeAttributes:
+              bucketName: another-bucket
         - name: sidecar-mount
           csi:
             driver: gcsfuse.run.googleapis.com
             readOnly: true
-            volumeAttributes: test-jeff
+            volumeAttributes:
+              bucketName: test-jeff
